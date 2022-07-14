@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <math.h>
+
+
+int main(void)
+{
+    float change; //define a variável change (troco)
+    do
+    {
+        change = get_float("Digite o troco: "); //solicita ao usuário o valor do troco
+    }
+    while (change < 0); //loop caso o usuário seja bobão
+    int cents = round(change * 100); //converte o valor para centavos e arredonda
+    int result1 = cents / 25; //sequência de subtrações para definir a quantidade certa de cada moeda
+    cents = cents - result1 * 25;
+    int result2 = cents / 10;
+    cents = cents - result2 * 10;
+    int result3 = cents / 5;
+    cents = cents - result3 * 5;
+    int result4 = cents / 1;
+    cents = cents - result4 * 1;
+    int result = result1 + result2 + result3 + result4; //soma a quantidade de cada moeda
+    printf("%i \n",result); //imprime o resultado
+}
