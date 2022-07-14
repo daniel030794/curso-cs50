@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <math.h>
+#include <cs50.h> // Biblioteca padrão do curso
+
+int checkSum();
+
+int main(void)
+{
+  
+    long numCard = get_long("Enter the card number:\n"), aux = numCard;
+
+    int digits = 0, startingDigits;
+
+    while (aux > 0)
+    {
+        aux /= 10;
+        digits++;
+    }
+
+    int check = checkSum(numCard, digits);
+
+    // Se o padrão de digitos for válido vai verificar as informações básicas do cartão
+    if (check % 10 == 0)
+    {
+        startingDigits = numCard / pow(10, digits - 2);
+
+        if (digits == 15 && (startingDigits == 34 || startingDigits == 37))
+        {
+            printf("AMEX\n");
+        }
+        else if (digits == 16 && (startingDigits > 50 && startingDigits < 56))
+        {
+            printf("MASTERCARD\n");
+        }
+        else if ((digits == 13 || digits == 16) && startingDigits / 10 == 4)
+        {
+            printf("VISA\n");
+        }
+        else
+        {
+            printf("INVALID\n");
+        }
+    }
+    else
+    {
+        printf("INVALID\n");
+    }
+}
+
+// Função responsável por verificar se a sequencia númerica é válida
+int checkSum(long numCard, int digits)
+{
+    int checkSum = 0;
+    for (int i = 0; i < digits; i++)
+    {
+        if (i % 2 != 0)
+        {
+            int step1 = (numCard / (long) pow(10, i)) % 10 * 2; // Efetua a multiplicação pulando de doido em dois dígitos
+
+            int digit1 = step1 / 10;
+            int digit2 = step1 % 10;
+
+            checkSum += digit1 + digit2; // Faz a soma de todas a multiplicações
+        }
+        else
+        {
+            // Essa linha soma os digitos que não foram multiplicados incluindo o resultado da multiplicação anterior
+            checkSum += (numCard / (long) pow(10, i)) % 10;
+        }
+    }
+
+    return checkSum;
+}
