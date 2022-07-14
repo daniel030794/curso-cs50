@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <math.h>
+
+
+int main(void)
+{
+    int inicial;
+    int final;
+  
+    do
+    {
+        inicial = get_int("Start size: ");
+    }
+    
+    while (inicial < 9); // retorna caso não satisfaça as condições
+     
+      do
+    {
+        final = get_int("End size: ");
+    }
+      while (final < inicial);
+        int n = inicial;
+        
+        n = n + (n / 3) - (n / 4);  //calculo
+         
+
+    printf("Years: %i\n", final);
+}
