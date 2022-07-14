@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <cs50.h>
+
+int main(void)
+
+{
+    //altura = height (criar variavel)
+    int altura;
+
+    do
+
+    {
+
+        altura = get_int("height: ");
+
+    }
+
+    while (altura < 1 || altura > 8);
+
+//loop principal
+    for (int i = 0; i < altura; i++)
+
+    {
+//loop espaçamento
+//p representa o espaço usado para mudar as posiçoes dos #. p inicia com valor digitado pelo usuario menos 1, e continua a diminuir até que i sejaigual a p, 
+ou seja, 7.
+        for (int p = altura - 1; p > i; p--)
+
+        {
+
+            printf(" ");
+
+        }
+//loop dos #
+//se colocar j<=i o numero de linhas fica igual ao numero digitado, caso apenas usar < tera uma linha a menos.
+        for (int j = 0; j <= i; j++)
+
+        {
+
+            printf("#");
+
+        }
+//espasso entre as piramidespirâmides
+        printf("  ");
+//segundo loop de #
+//resultado de colocar apenas < é o mesmo do loop anterior
+        for (int k = 0; k <= i; k++)
+
+        {
+
+            printf("#");
+
+        }
+
+//pula para a próxima linha
+        printf("\n");
+    }
+}
